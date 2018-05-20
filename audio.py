@@ -1,5 +1,6 @@
 import pyaudio
 import wave
+import speech_recognition as sr
 
 def play_audio(filename):
     chunk = 1024
@@ -24,4 +25,29 @@ def play_audio(filename):
 
 
 play_audio("./audio/Alesis-Fusion-Acoustic-Bass-C2.wav")
+
+
+r = sr.Recognizer()
+
+def initSpeech():
+    print("Listening...")
+    play_audio("./audio/good-morning.wav")
+
+    with sr.Microphone() as source:
+        print("Say Something")
+        audio = r.listen(source)
+
+    play_audio("./audio/the-little-dwarf.wav")
+
+    command = ""
+
+    try:
+        command = r.recognize_google(audio)
+    except:
+        print("Couldn't understand you, bro.")
+
+    print("Your command:")
+    print(command)
+
+initSpeech()
 
