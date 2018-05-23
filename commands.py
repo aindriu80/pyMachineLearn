@@ -12,6 +12,9 @@ class Commander:
                 self.respond("You haven't told me your name yet")
             else:
                 self.respond("My name is pie python commander. How are you?")
+        if "launch" or "open" in text:
+            app = text.split(" ", 1)[-1]
+            os.system("open -a" + app + ".app")
 
     def respond(self, response):
         print(response)

@@ -40,13 +40,13 @@ cmd = Commander()
 
 def initSpeech():
     print("Listening...")
-    play_audio("./audio/good-morning.wav")
+    play_audio("./audio/ping.wav")
 
     with sr.Microphone() as source:
         print("Say Something")
         audio = r.listen(source)
 
-    play_audio("./audio/the-little-dwarf.wav")
+    play_audio("./audio/pong.wav")
 
     command = ""
 
@@ -57,7 +57,8 @@ def initSpeech():
 
     print("Your command:")
     print(command)
-    if command == "quit":
+    if command == ["quit","exit", "bye", "goodbye"]:
+        global running
         running = False
 
     cmd.discover(command)
