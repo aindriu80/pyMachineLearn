@@ -26,11 +26,21 @@ class Fetcher:
                 print("Failed bro")
 
             soup = BeautifulSoup(self.driver.page_source, "html.parser")
-            answer = soup.find_all(class_="_sPg")[0]
+            answer = soup.find_all(class_="_sPg")
+
+            with open("text.html", "w+") as f:
+                f.write(str(soup))
+                f.close()
 
             print(answer.get_text())
+            if not answer:
+                answer = soup.find_all(class_="_m3b")
+
+            if not answer:
+                answer = "I don't know."
+
             self.driver.quit()
-            return answer.get_text()
+            return answer[0].get_text()
 
 
 
